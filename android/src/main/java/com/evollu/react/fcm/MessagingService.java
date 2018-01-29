@@ -54,12 +54,12 @@ public class MessagingService extends FirebaseMessagingService {
                 ReactContext context = mReactInstanceManager.getCurrentReactContext();
                 // If it's constructed, send a notification
                 if (context != null) {
-                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(message);
+                    LocalBroadcastManager.getInstance(context.getApplicationContext()).sendBroadcast(message);
                 } else {
                     // Otherwise wait for construction, then send the notification
                     mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
                         public void onReactContextInitialized(ReactContext context) {
-                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(message);
+                            LocalBroadcastManager.getInstance(context.getApplicationContext()).sendBroadcast(message);
                         }
                     });
                     if (!mReactInstanceManager.hasStartedCreatingInitialContext()) {
